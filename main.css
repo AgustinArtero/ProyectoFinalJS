@@ -1,4 +1,6 @@
-
+body {
+    font-family: "Open Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", Helvetica, Arial, sans-serif; 
+  }
 .prod {
     background-color: #dfdfdf;
     margin-top: 10px;
