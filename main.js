@@ -6,6 +6,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const DOMcarrito = document.querySelector("#carrito");
   const DOMtotal = document.querySelector("#total");
   const DOMbotonVaciar = document.querySelector("#botonVaciar");
+  const DOMbotonComprar = document.querySelector("#botonComprar");
   const miLocalStorage = window.localStorage;
 
   // Funciones
@@ -112,9 +113,47 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  function comprarBotonClick() {}
+  function comprarBotonClick() {
+    const swalWithBootstrapButtons = Swal.mixin({
+      customClass: {
+        confirmButton: "btn btn-success",
+        cancelButton: "btn btn-danger",
+      },
+      buttonsStyling: false,
+    });
+
+    swalWithBootstrapButtons
+      .fire({
+        title: "Desea comprar los productos seleccionados?",
+        text: "Puedes cancelar o modificar los productos dando en Cancelar",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonText: "Terminar compra",
+        cancelButtonText: "Cancelar!",
+        reverseButtons: true,
+      })
+      .then((result) => {
+        if (result.isConfirmed) {
+          swalWithBootstrapButtons.fire(
+            "Hecho!",
+            "Tu compra resultó exitosa.",
+            "success"
+          );
+          carrito = [];
+          renderizarCarrito();
+          localStorage.clear();
+        } else if (result.dismiss === Swal.DismissReason.cancel) {
+          swalWithBootstrapButtons.fire(
+            "Cancelado",
+            "Pero puedes modificar los productos aún!",
+            "error"
+          );
+        }
+      });
+  }
 
   DOMbotonVaciar.addEventListener("click", vaciarCarrito);
+  DOMbotonComprar.addEventListener("click", comprarBotonClick);
 
   cargarCarritoDeLocalStorage();
   renderizarProductos();
