@@ -32,29 +32,42 @@
         </div>
       </nav>
       
-      <div class="container d-flex justify-content-between align-items-center">
-        <div>Productos: </div>
     <h1 class=" text-center tittle">Bienvenido!</h1>
-    <div class="text-center">
-      <button type="button" class="btn btn-outline-success   "> <a href="./pag/carrito.html">Carrito</a> </button>
-    </div>
-  </div>  
+    
     <p class="text-center">Seleccione sus <b>Productos</b></p>
 
+  <main>
+    
+    <section>
     <div class="container">
-      <div id="container" class="row"></div>
+      <!-- Carrito -->
+  <div class="container">
+    <div class="row ">
+      <main id="items" class="col-sm-8 row "></main>
+      <aside class="col-sm-4 color-back text-center">
+          <h2>Productos seleccionados</h2>
+          <ul id="carrito" class="list-group"></ul>
+          <hr>
+          <p class="text-right"> <b>Total:</b>  &dollar;<span id="total"></span></p>
+          <button id="botonVaciar" class="btn Example-btn1">Vaciar</button>
+          <a href="#" class="btn Example-btn1 comprarBoton" id="botonComprar">Comprar</a>
+      </aside>
+    </div>
+  </div>
+  <!--Cards-->
+      <div id="container" class="row card-mod"></div>
     </div>
 
-    <div id="cart"></div>
-    <a name="cart"></a>
+  </section>
+</main>
 
-
-
-
-
+  <footer>
+  </footer>
 
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="./main.js"></script>
+    <script src="./app.js"></script>
 </body>
 </html>

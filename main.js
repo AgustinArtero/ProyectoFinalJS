@@ -1,147 +1,122 @@
-const productos = [
-  {
-    nombre: "hamburguesa simple",
-    precio: 600,
-    id: 1,
-    imagen: "./img/hamburguesa.png",
-  },
-  {
-    nombre: "hamburguesa con cheddar",
-    precio: 800,
-    id: 2,
-    imagen: "./img/hamburguesa2.jpg",
-  },
-  {
-    nombre: "hamburguesa con cheddar y bacon",
-    precio: 1000,
-    id: 3,
-    imagen: "./img/papas1.jpg",
-  },
-  {
-    nombre: "papas fritas",
-    precio: 400,
-    id: 4,
-    imagen: "./img/papas1.jpg",
-  },
-  {
-    nombre: "papas fritas con cheddar",
-    precio: 600,
-    id: 5,
-    imagen: "./img/papas2.jpg",
-  },
-  {
-    nombre: "ensalada completa",
-    precio: 800,
-    id: 6,
-    imagen: "./img/ensalada.jpg",
-  },
-];
+document.addEventListener("DOMContentLoaded", () => {
+  // Variables
+  let carrito = [];
+  const divisa = "$";
+  const DOMitems = document.querySelector("#items");
+  const DOMcarrito = document.querySelector("#carrito");
+  const DOMtotal = document.querySelector("#total");
+  const DOMbotonVaciar = document.querySelector("#botonVaciar");
+  const miLocalStorage = window.localStorage;
 
-const createCards = () => {
-  let contenedor = document.getElementById("container");
-  productos.forEach((producto, posicion) => {
-    let card = document.createElement("div");
-    card.classList.add("card", "col-sm-12", "col-lg-3");
-    card.innerHTML = `
-    <img src="${producto.imagen}" class="card-img-top" alt="...">
-    <div class="card-body">
-    <h5 class="card-title">${producto.nombre}</h5>
-    <p class="card-text">${producto.precio}</p>
-    <a href="#" class="btn btn-primary" onClick="addtoCarrito()">Añadir al carrito</a> </div>`;
-    contenedor.appendChild(card);
-  });
-};
-
-createCards();
-
-const addtoCarrito = () => {
-  alert("Acabas de agregar el producto al carrito");
-};
-
-// Proyecto anterior a DOM
-/*
-
-let seleccion = prompt("Hola! Desea ver el catalogo de la tienda?");
-
-while (seleccion != "si" && seleccion != "no") {
-  alert("Por favor, ingrese SI o NO");
-  seleccion = prompt("Desea comprar algo?");
-}
-
-if (seleccion == "si") {
-  alert("A continuacion podra ver nuestro catalogo");
-  let todosLosProductos = productos.map(
-    (producto) => producto.nombre + " $" + producto.precio
-  );
-  alert(todosLosProductos.join(" \n "));
-} else if (seleccion == "no") {
-  alert("Gracias por venir, vuelva pronto!");
-}
-
-while (seleccion != "no") {
-  let producto = prompt(
-    "Agrega productos a tu carrito. \n hamburguesa simple \n hamburguesa con cheddar  \n hamburguesa con cheddar y bacon \n papas fritas \n papas fritas con cheddar \n ensalada completa"
-  );
-  let precio = 0;
-
-  if (
-    producto == "hamburguesa simple" ||
-    producto == "hamburguesa con cheddar" ||
-    producto == "hamburguesa con cheddar y bacon" ||
-    producto == "papas fritas" ||
-    producto == "papas fritas con cheddar" ||
-    producto == "ensalada completa"
-  ) {
-    switch (producto) {
-      case "hamburguesa simple":
-        precio = 600;
-        break;
-      case "hamburguesa con cheddar":
-        precio = 800;
-        break;
-      case "hamburguesa con cheddar y bacon":
-        precio = 1000;
-        break;
-      case "papas fritas":
-        precio = 400;
-        break;
-      case "papas fritas con cheddar":
-        precio = 600;
-        break;
-      case "ensalada completa":
-        precio = 800;
-        break;
-      default:
-        break;
-    }
-    let unidades = parseInt(prompt("Cuantas unidades desea?"));
-    carrito.push({producto, unidades, precio});
-    console.log(carrito);
-  } else {
-    alert("El producto que ingresaste no es valido o no esta disponible");
+  // Funciones
+  function renderizarProductos() {
+    productos.forEach((info) => {
+      // Estructura
+      const miNodo = document.createElement("div");
+      miNodo.classList.add("card", "col-sm-4", "text-center");
+      // Body
+      const miNodoCardBody = document.createElement("div");
+      miNodoCardBody.classList.add("card-body", "align-content-around");
+      // Titulo
+      const miNodoTitle = document.createElement("h5");
+      miNodoTitle.classList.add("card-title");
+      miNodoTitle.textContent = info.nombre;
+      // Imagen
+      const miNodoImagen = document.createElement("img");
+      miNodoImagen.classList.add("img-fluid");
+      miNodoImagen.setAttribute("src", info.imagen);
+      // Precio
+      const miNodoPrecio = document.createElement("p");
+      miNodoPrecio.classList.add("card-text");
+      miNodoPrecio.textContent = `${divisa}${info.precio}`;
+      // Boton
+      const miNodoBoton = document.createElement("button");
+      miNodoBoton.classList.add("btn", "Example-btn8");
+      miNodoBoton.textContent = "Añadir al carrito";
+      miNodoBoton.setAttribute("marcador", info.id);
+      miNodoBoton.addEventListener("click", anyadirProductoAlCarrito);
+      // Insertamos
+      miNodoCardBody.appendChild(miNodoImagen);
+      miNodoCardBody.appendChild(miNodoTitle);
+      miNodoCardBody.appendChild(miNodoPrecio);
+      miNodoCardBody.appendChild(miNodoBoton);
+      miNodo.appendChild(miNodoCardBody);
+      DOMitems.appendChild(miNodo);
+    });
   }
 
-  seleccion = prompt("Desea seguir comprando?");
-  while (seleccion != "si" && seleccion != "no") {
-    alert("Por favor, ingrese SI o NO");
-    seleccion = prompt("Desea seguir comprando?");
-    if (seleccion === "no") {
-      alert("Gracias por la compra! Vuelva pronto");
-      carrito.forEach((carritoFinal) => {
-        console.log(
-          `Producto: ${carritoFinal.producto}, cantidad de unidades: ${
-            carritoFinal.unidades
-          }, total a pagar por el producto: ${
-            carritoFinal.unidades * carritoFinal.precio
-          }`
-        );
+  function anyadirProductoAlCarrito(evento) {
+    carrito.push(evento.target.getAttribute("marcador"));
+    renderizarCarrito();
+    guardarCarritoEnLocalStorage();
+  }
+
+  function renderizarCarrito() {
+    DOMcarrito.textContent = "";
+    const carritoSinDuplicados = [...new Set(carrito)];
+    carritoSinDuplicados.forEach((item) => {
+      const miItem = productos.filter((itemBaseDatos) => {
+        return itemBaseDatos.id === parseInt(item);
       });
-      break;
+      const numeroUnidadesItem = carrito.reduce((total, itemId) => {
+        return itemId === item ? (total += 1) : total;
+      }, 0);
+      const miNodo = document.createElement("li");
+      miNodo.classList.add("list-group-item", "text-center", "mx-1");
+      miNodo.textContent = `Elegiste ${miItem[0].nombre} x ${numeroUnidadesItem} = ${divisa} ${miItem[0].precio}`;
+      const miBoton = document.createElement("button");
+      miBoton.classList.add("btn", "Example-btn2", "mx-5");
+      miBoton.textContent = "Eliminar";
+      miBoton.style.marginLeft = "1rem";
+      miBoton.dataset.item = item;
+      miBoton.addEventListener("click", borrarItemCarrito);
+      miNodo.appendChild(miBoton);
+      DOMcarrito.appendChild(miNodo);
+    });
+    DOMtotal.textContent = calcularTotal();
+  }
+
+  function borrarItemCarrito(evento) {
+    const id = evento.target.dataset.item;
+    carrito = carrito.filter((carritoId) => {
+      return carritoId !== id;
+    });
+    renderizarCarrito();
+    guardarCarritoEnLocalStorage();
+  }
+
+  function calcularTotal() {
+    return carrito
+      .reduce((total, item) => {
+        const miItem = productos.filter((itemBaseDatos) => {
+          return itemBaseDatos.id === parseInt(item);
+        });
+        return total + miItem[0].precio;
+      }, 0)
+      .toFixed(2);
+  }
+
+  function vaciarCarrito() {
+    carrito = [];
+    renderizarCarrito();
+    localStorage.clear();
+  }
+
+  function guardarCarritoEnLocalStorage() {
+    miLocalStorage.setItem("carrito", JSON.stringify(carrito));
+  }
+
+  function cargarCarritoDeLocalStorage() {
+    if (miLocalStorage.getItem("carrito") !== null) {
+      carrito = JSON.parse(miLocalStorage.getItem("carrito"));
     }
   }
-}
 
-const total = carrito.reduce((acc, el) => acc + el.precio * el.unidades, 0);
-console.log(`El total a pagar es: $${total}`);
+  function comprarBotonClick() {}
 
-alert(`Precio a pagar: $${total}`); */
+  DOMbotonVaciar.addEventListener("click", vaciarCarrito);
+
+  cargarCarritoDeLocalStorage();
+  renderizarProductos();
+  renderizarCarrito();
+});
