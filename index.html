@@ -17,13 +17,10 @@
           </button>
           <div class="collapse navbar-collapse" id="navbarScroll">
             <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
-              <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="#">Menu</a>
-              </li>
             </ul>
             <form class="d-flex" role="search">
               <input class="form-control me-2" type="search" placeholder="Que desea buscar?" aria-label="Search">
-              <button class="btn btn-outline-success" type="submit">Buscar</button>
+              <button class="btn btn-outline-success" type="submit" id="Buscador">Buscar</button>
             </form>
           </div>
         </div>
@@ -38,16 +35,18 @@
     <section>
     <div class="container">
       <!-- Carrito -->
-  <div class="container">
-    <div class="row ">
+  <div class="container ">
+    <div class="row justify-content-around align-items-center">
       <main id="items" class="col-sm-8 row "></main>
-      <aside class="col-sm-4 color-back text-center">
-          <h2>Productos seleccionados</h2>
+      <aside class="col-sm-4 color-back text-center ">
+          <h2 class="text-center">Productos seleccionados</h2>
           <ul id="carrito" class="list-group"></ul>
           <hr>
           <p class="text-right"> <b>Total:</b>  &dollar;<span id="total"></span></p>
-          <button id="botonVaciar" class="btn Example-btn1">Vaciar</button>
-          <a href="#" class="btn Example-btn1 comprarBoton" id="botonComprar">Comprar</a>
+          <div >
+          <button id="botonVaciar" class="btn Example-btn1 ">Vaciar</button>
+          <a href="#" class="btn Example-btn0 comprarBoton " id="botonComprar">Comprar</a>
+        </div>
       </aside>
     </div>
   </div>

@@ -22,47 +22,90 @@ background: radial-gradient(circle, rgba(255,255,255,1) 44%, rgba(120,120,120,1)
     padding-bottom: 10px;
 }
 
-.Example-btn8{ 
-    font-family: "Open Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", Helvetica, Arial, sans-serif; 
+.btn-style-carrito {
+
+    font-family: Roboto, sans-serif;
     font-weight: 0;
     font-size: 15px;
-    color: #000000;
-    background-color: #ffffff;
-    padding: 5px 50px;
-    border: solid #000000 2px;
-    box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 8px;
-    border-radius: 3px;
+    color: #ededed;
+    background-color: #212121;
+    padding: 10px 26px;
+    margin: auto;
+    border: solid #ededed 2px;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    border-radius: 50px 15px;
     transition : 500ms;
     transform: translateY(0);
-    text-transform: uppercase;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    cursor: pointer;
     }
-    
-    .Example-btn8:hover{ 
-    transition : 500ms; 
-    padding: 2px 44px; 
-    transform : translateY(-0px);
-    background-color: #000000;
-    color: #ffffff;
-    border: solid 2px #ffffff;
-    }
+
+    .btn-style-carrito:hover{
+
+        transition : 750ms;
+        padding: 10px 27px;
+        transform : translateY(-0px);
+        background-color: #ededed;
+        color: #212121;
+        border: solid 2px #212121;
+        }
+
     
     .Example-btn1{
-        background-color: #081f2d; 
-        border-radius: 29px; 
-        border: 1px solid #081F2D; 
-        color: white; 
-        font-size: 15px; 
-       padding: 10px 45px; 
-        cursor: pointer; 
-        transition: 0.3s; 
-        }
+
+            font-family: Roboto, sans-serif;
+            font-weight: 500;
+            font-size: 15px;
+            color: #ededed;
+            background-color: #212121;
+            padding: 10px 20px;
+            margin: auto;
+            border: solid #ededed 2px;
+            box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+            border-radius: 50px 15px;
+            transition : 500ms;
+            transform: translateY(0);
+            align-items: center;
+            cursor: pointer;
+            }
         
-        .Example-btn1:hover{ 
-        background-color: #000000; 
-        color: #d6d6d6; 
-        border-color: #081F2D; 
-        transition: 0.3s; 
-       }
+            .Example-btn1:hover{
+        
+                transition : 750ms;
+                padding: 10px 21px;
+                transform : translateY(-0px);
+                background-color: #d10000;
+                color: #ffffff;
+                border: solid 2px #212121;
+                }
+
+       .Example-btn0{
+            
+            font-family: Roboto, sans-serif;
+            font-weight: 500;
+            font-size: 15px;
+            color: #ededed;
+            background-color: #212121;
+            padding: 10px 20px;
+            border: solid #ededed 2px;
+            box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+            border-radius: 15px 50px;
+            transition : 750ms;
+            transform: translateY(0);
+            align-items: center;
+            cursor: pointer;
+            }
+            .Example-btn0:hover{
+
+                transition : 750ms;
+                padding: 10px 21px;
+                transform : translateY(-0px);
+                background-color: #53b800;
+                color: #ffffff;
+                border: solid 2px #212121;
+                }
 
        .Example-btn2{ 
         color: #fff; 
@@ -87,3 +130,21 @@ background: radial-gradient(circle, rgba(255,255,255,1) 44%, rgba(120,120,120,1)
         box-sizing:border-box; 
         } 
         
+.css-p-cards {
+    margin: 5px;
+    padding: auto;
+}
+
+.css-price-cards{
+    margin: 5px;
+}
+
+h2{
+    font-size: 1.8rem;
+    padding-top: 10px;
+    margin: auto;
+}
+
+.div-btns{
+    margin: 5px;
+}

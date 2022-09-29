@@ -7,6 +7,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const DOMtotal = document.querySelector("#total");
   const DOMbotonVaciar = document.querySelector("#botonVaciar");
   const DOMbotonComprar = document.querySelector("#botonComprar");
+  const DOMbuscador = document.querySelector("#Buscador");
   const miLocalStorage = window.localStorage;
 
   // Funciones
@@ -17,10 +18,10 @@ document.addEventListener("DOMContentLoaded", () => {
       miNodo.classList.add("card", "col-sm-4", "text-center");
       // Body
       const miNodoCardBody = document.createElement("div");
-      miNodoCardBody.classList.add("card-body", "align-content-around");
+      miNodoCardBody.classList.add("card-body");
       // Titulo
       const miNodoTitle = document.createElement("h5");
-      miNodoTitle.classList.add("card-title");
+      miNodoTitle.classList.add("card-title", "css-p-cards");
       miNodoTitle.textContent = info.nombre;
       // Imagen
       const miNodoImagen = document.createElement("img");
@@ -28,11 +29,11 @@ document.addEventListener("DOMContentLoaded", () => {
       miNodoImagen.setAttribute("src", info.imagen);
       // Precio
       const miNodoPrecio = document.createElement("p");
-      miNodoPrecio.classList.add("card-text");
+      miNodoPrecio.classList.add("card-text", "css-price-cards");
       miNodoPrecio.textContent = `${divisa}${info.precio}`;
       // Boton
       const miNodoBoton = document.createElement("button");
-      miNodoBoton.classList.add("btn", "Example-btn8");
+      miNodoBoton.classList.add("btn", "btn-style-carrito");
       miNodoBoton.textContent = "Añadir al carrito";
       miNodoBoton.setAttribute("marcador", info.id);
       miNodoBoton.addEventListener("click", anyadirProductoAlCarrito);
@@ -48,6 +49,22 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function anyadirProductoAlCarrito(evento) {
     carrito.push(evento.target.getAttribute("marcador"));
+    const Toast = Swal.mixin({
+      toast: true,
+      position: "top-end",
+      showConfirmButton: false,
+      timer: 1000,
+      timerProgressBar: true,
+      didOpen: (toast) => {
+        toast.addEventListener("mouseenter", Swal.stopTimer);
+        toast.addEventListener("mouseleave", Swal.resumeTimer);
+      },
+    });
+
+    Toast.fire({
+      icon: "success",
+      title: "El producto ha sido añadido",
+    });
     renderizarCarrito();
     guardarCarritoEnLocalStorage();
   }
@@ -64,7 +81,7 @@ document.addEventListener("DOMContentLoaded", () => {
       }, 0);
       const miNodo = document.createElement("li");
       miNodo.classList.add("list-group-item", "text-center", "mx-1");
-      miNodo.textContent = `Elegiste ${miItem[0].nombre} x ${numeroUnidadesItem} = ${divisa} ${miItem[0].precio}`;
+      miNodo.textContent = `- ${miItem[0].nombre} x ${numeroUnidadesItem} = ${divisa} ${miItem[0].precio}`;
       const miBoton = document.createElement("button");
       miBoton.classList.add("btn", "Example-btn2", "mx-5");
       miBoton.textContent = "Eliminar";
@@ -98,9 +115,23 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function vaciarCarrito() {
-    carrito = [];
-    renderizarCarrito();
-    localStorage.clear();
+    Swal.fire({
+      title: "Quieres vaciar el carrito?",
+      text: "Si continuas el carrito se variará",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      cancelButtonText: "Cancelar",
+      confirmButtonText: "Aceptar",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        carrito = [];
+        renderizarCarrito();
+        localStorage.clear();
+        Swal.fire("Hecho!", "El carrito se vació con éxito.", "success");
+      }
+    });
   }
 
   function guardarCarritoEnLocalStorage() {
@@ -151,9 +182,13 @@ document.addEventListener("DOMContentLoaded", () => {
         }
       });
   }
+  function buscadorBotonClick() {
+    Swal.fire("Ésta funcion aún está en desarrollo.");
+  }
 
   DOMbotonVaciar.addEventListener("click", vaciarCarrito);
   DOMbotonComprar.addEventListener("click", comprarBotonClick);
+  DOMbuscador.addEventListener("click", buscadorBotonClick);
 
   cargarCarritoDeLocalStorage();
   renderizarProductos();

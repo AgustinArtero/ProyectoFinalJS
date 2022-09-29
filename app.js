@@ -1,6 +1,6 @@
 const productos = [
   {
-    nombre: "Hamburguesa simple",
+    nombre: "Hamburguesa simple fresca",
     precio: 600,
     id: 1,
     imagen: "./img/hamburguesa.png",
@@ -18,13 +18,13 @@ const productos = [
     imagen: "./img/hamburguesa.png",
   },
   {
-    nombre: "Papas fritas",
+    nombre: "Papas fritas solas",
     precio: 400,
     id: 4,
     imagen: "./img/papas1.jpg",
   },
   {
-    nombre: "Papas fritas con cheddar",
+    nombre: "Papas con cheddar",
     precio: 600,
     id: 5,
     imagen: "./img/papas2.jpg",
